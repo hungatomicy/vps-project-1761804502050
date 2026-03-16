@@ -1,0 +1,51 @@
+#!name=Meitu XiuXiu Premium - Nightmarket
+#!desc=Má»Ÿ khoÃ¡ premium cho Meitu XiuXiu 
+#!tag=Unlock VIP, Meitu, Photo Editor
+# ðŸ‘¤ Author: @Nightmarket Server  
+# ðŸ’¬ Discord: https://discord.gg/juY9tw5AJY  
+# ðŸš€ Web Module: https://nightmarket.site/modules
+
+
+proxy-providers: {}
+proxies: []
+
+proxy-groups:
+  - name: MeituXiuXiu
+    type: select
+    proxies:
+      - DIRECT
+  - name: NightmarketServer
+    type: select
+    proxies:
+      - DIRECT
+
+http:
+  mitm:
+    - "h5.xiuxiu.meitu.com"
+    - "api.xiuxiu.meitu.com"
+
+  script:
+    - match: ^https?:\/\/(h5|api)\.xiuxiu\.meitu\.com\/v\d\/(h\d\/vip|vip|user)\/
+      name: meituxiuxiu1
+      type: response
+      require-body: true
+      timeout: 10
+
+script-providers:
+  meituxiuxiu1:
+    url: https://raw.githubusercontent.com/NightmarketServer/Locket-IPA/refs/heads/main/Meitu_fix.js
+    interval: 86400
+
+rules:
+  - DOMAIN-SUFFIX,xiuxiu.meitu.com,MeituXiuXiu
+  - MATCH,NightmarketServer
+
+dns:
+  default-nameserver:
+    - 114.114.114.114
+    - 1.1.1.1
+  skip-cert-verify: true
+
+log-level: info
+mode: rule
+x1.00
